@@ -5,7 +5,7 @@ const styles=StyleSheet.create({
     songItem:{
         flexDirection:"row",
         width:"100%",
-        height:"30%",
+        height:"25%",
         marginTop:0,
         paddingBottom:50,
     },
@@ -13,7 +13,7 @@ const styles=StyleSheet.create({
         position:"absolute",
         top:4,
         width:70,
-        height:75,
+        height:70,
         
     },
     title:{

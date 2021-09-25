@@ -7,22 +7,23 @@ import { SongItemProps } from '../../screens/AlbumScreen';
 import { getNativeSourceAndFullInitialStatusForLoadAsync } from 'expo-av/build/AV';
 
 
-const song={
-    id:'1',
-    songUri:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3",
-    imageUri:"https://cache.boston.com/resize/bonzai-fba/Globe_Photo/2011/04/14/1302796985_4480/539w.jpg",
-    title:"notJust dev beats",
-    artists:"Anonymous",
-};
-const sample=require('../../SpotifyAssets/data/demoSound.mp3');
-const PlayerWidget=()=>{
+export type playerWidgetProps={
+  title:string,
+  image:string,
+  artist:string,
+  url:string,
+}
+
+
+
+const PlayerWidget= (props:playerWidgetProps)=>{
     const [Loaded,SetLoaded]=React.useState(false);
     const [Loading,SetLoading]=React.useState(false);
     const sound=React.useRef(new Audio.Sound);
     const [flag,setFlag]=useState(false);
     const[durationMillis,setDurationMillis]=React.useState(null);
     const[positionMillis,setPositionMillis]=React.useState(null);
-
+    const sample=require("../../SpotifyAssets/data/raatan.mp3");
     React.useEffect(()=>{
         LoadAudio();
     },[])
@@ -84,17 +85,16 @@ const PlayerWidget=()=>{
        return(positionMillis/durationMillis)*100
 
     }
-
+   
     return (
         <View style={styles.songItem}>
             <View style={[styles.progress,{width:`${progress()}%`}]}></View>
-            <Image  style={styles.image}source={{uri:song.imageUri}}/>
+            <Image  style={styles.image} source={{uri:props.image}}/>
             <View style={{flexDirection:'column'}}>
-            <Text style={styles.title}>{song.title}</Text>
-            <Text style={styles.artist}>{song.artists}</Text>
+            <Text style={styles.title}>{props.title}</Text>
+            <Text style={styles.artist}>{props.artist}</Text>
             </View>
             <View style={styles.widgetIcons}>
-            <AntDesign name="hearto" color="white" size={32} style={{marginRight:20}}/>
             <Pressable onPress={PlayPauseAudio} style={styles.play}>
             <AntDesign name={flag?"pause":"caretright"} size={32} color="white"/>
             </Pressable>   

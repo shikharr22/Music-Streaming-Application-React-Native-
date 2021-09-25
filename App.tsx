@@ -10,22 +10,27 @@ import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
 import PlayerWidget from './components/PlayerWidget';
+import {NativeBaseProvider, useColorMode,Center,Text,Button,useColorModeValue} from 'native-base';
 
+
+console.disableYellowBox = true;
 export default function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
+  const {colorMode,toggleColorMode}=useColorMode();
 
   if (!isLoadingComplete) {
     return null;
   } else {
     return (
-      <SafeAreaProvider>
+      <SafeAreaProvider >
         <Navigation colorScheme={'dark'} />
-        <View style={styles.playerWidget}>
+        {/* <View style={styles.playerWidget}>
         <PlayerWidget/>
-        </View>
+        </View> */}
         <StatusBar />
       </SafeAreaProvider>
+      
     );
   }
 }

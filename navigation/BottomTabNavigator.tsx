@@ -13,6 +13,7 @@ import TabTwoScreen from '../screens/TabTwoScreen';
 import { BottomTabParamList, TabOneParamList, TabTwoParamList } from '../types';
 import HomeScreen from '../screens/HomeScreen'
 import AlbumScreen from '../screens/AlbumScreen';
+import LoginScreen from '../screens/LoginScreen';
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
 export default function BottomTabNavigator() {
@@ -21,19 +22,12 @@ export default function BottomTabNavigator() {
   return (
     <BottomTab.Navigator
       initialRouteName="TabOne"
-      tabBarOptions={{ activeTintColor: "white" }}>
+      tabBarOptions={{ activeTintColor: "white", keyboardHidesTabBar: true }}>
       <BottomTab.Screen
-        name="Home"
+        name="Home "
         component={TabOneNavigator}
         options={{
           tabBarIcon: ({ color }) => <Entypo name="home" color="#f0ecc7" size={30} style={{ marginBottom: -3 }} />,
-        }}
-      />
-      <BottomTab.Screen
-        name="Search"
-        component={TabTwoNavigator}
-        options={{
-          tabBarIcon: ({ color }) => <EvilIcons name="search" color="#f0ecc7"  size={30} style={{ marginBottom: -3 }}/>,
         }}
       />
       <BottomTab.Screen
@@ -68,16 +62,23 @@ const TabOneStack = createStackNavigator<TabOneParamList>();
 function TabOneNavigator() {
   return (
     <TabOneStack.Navigator>
+     
       <TabOneStack.Screen
+        name="Login Screen"
+        component={LoginScreen}
+        options={{ headerShown:true,headerTitle: 'Login' , headerTitleStyle:{textAlign:'center',flex:1}}}
+        
+      />
+       <TabOneStack.Screen
         name="Home Screen"
         component={HomeScreen}
-        options={{ headerTitle: 'Home' , headerTitleStyle:{textAlign:'center',flex:1}}}
+        options={{ headerShown:false,headerTitle: '' , headerTitleStyle:{textAlign:'center'}}}
         
       />
       <TabOneStack.Screen
         name="Album Screen"
         component={AlbumScreen}
-        options={{ headerTitle: 'Album' , headerTitleStyle:{textAlign:'center',flex:1}}}
+        options={{ headerShown:true,headerTitle: 'Album' , headerTitleStyle:{textAlign:'center',flex:1}}}
         
       />
     </TabOneStack.Navigator>
@@ -93,7 +94,7 @@ function TabTwoNavigator() {
       <TabTwoStack.Screen
         name="TabTwoScreen"
         component={TabTwoScreen}
-        options={{ headerTitle: 'Tab Two Title' }}
+        options={{ headerTitle: 'Tab Two Title',headerShown:false }}
       />
     </TabTwoStack.Navigator>
   );
